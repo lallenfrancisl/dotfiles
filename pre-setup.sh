@@ -8,4 +8,3 @@ else
     git pull origin master
 fi
 
-stow .

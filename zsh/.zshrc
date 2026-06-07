@@ -78,7 +78,7 @@ eval "$(pyenv init --path)"
 plugins=(
   git nvm command-not-found
   pyenv virtualenv sudo
-  themes
+  timer
 )
 
 # Plugin configuration

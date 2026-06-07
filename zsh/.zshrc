@@ -90,16 +90,11 @@ source $ZSH/oh-my-zsh.sh
 
 unset VIRTUAL_ENV_DISABLE_PROMPT
 
-# Command autosuggestions
-source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-
 export COLORTERM=truecolor
 typeset -U path PATH
 
 # opencode
-if command -v opencode >/dev/null 2>&1; then
-  path=("$HOME/.opencode/bin" $path)
-fi
+path=("$HOME/.opencode/bin" $path)
 
 if command -v go >/dev/null 2>&1; then
   path=("$(go env GOPATH)/bin" $path)
@@ -129,3 +124,7 @@ fi
 # Aliases
 #
 alias zed='flatpak run dev.zed.Zed'
+
+# Command autosuggestions
+# source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+

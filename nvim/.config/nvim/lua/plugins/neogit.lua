@@ -1,6 +1,7 @@
 return {
   "NeogitOrg/neogit",
   lazy = true,
+  version = "*",
   dependencies = {
     "esmuellert/codediff.nvim",
 

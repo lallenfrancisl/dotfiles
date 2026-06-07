@@ -1,5 +1,6 @@
 return {
   "rebelot/kanagawa.nvim",
+  version = "*",
   opts = {
     compile = false,
     dimInactive = false,

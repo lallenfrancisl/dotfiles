@@ -65,42 +65,67 @@ ZSH_THEME="robbyrussell"
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init --path)"
+
+
 # Which plugins would you like to load?
 # Standard plugins can be found in $ZSH/plugins/
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-  git nvm
+  git nvm command-not-found
+  pyenv virtualenv sudo
+  themes
 )
+
+# Plugin configuration
+zstyle ':omz:plugins:pipenv' auto-shell no
 
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
+
+unset VIRTUAL_ENV_DISABLE_PROMPT
+
+# Command autosuggestions
+source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+export COLORTERM=truecolor
+typeset -U path PATH
+
+# opencode
+if command -v opencode >/dev/null 2>&1; then
+  path=("$HOME/.opencode/bin" $path)
+fi
+
+if command -v go >/dev/null 2>&1; then
+  path=("$(go env GOPATH)/bin" $path)
+fi
+
+
+# uv
+path=("$HOME/.local/bin" $path)
+
+# AppImages
+path=("$HOME/AppImages" $path)
+
+export PATH
+
+if [[ -n $SSH_CONNECTION ]]; then
+  export EDITOR='vim'
+else
+  export EDITOR='nvim'
+fi
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='nvim'
-# fi
 
-# Compilation flags
-# export ARCHFLAGS="-arch $(uname -m)"
-
-# Set personal aliases, overriding those provided by Oh My Zsh libs,
-# plugins, and themes. Aliases can be placed here, though Oh My Zsh
-# users are encouraged to define aliases within a top-level file in
-# the $ZSH_CUSTOM folder, with .zsh extension. Examples:
-# - $ZSH_CUSTOM/aliases.zsh
-# - $ZSH_CUSTOM/macos.zsh
-# For a full list of active aliases, run `alias`.
+# Aliases
 #
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
+alias zed='flatpak run dev.zed.Zed'

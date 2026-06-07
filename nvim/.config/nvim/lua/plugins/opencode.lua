@@ -141,9 +141,10 @@ local function toggle_opencode_window()
 end
 
 ---@type LazySpec
-return {
+local spec = {
   {
     "nickjvandyke/opencode.nvim",
+    version = "*",
     config = function()
       local group = vim.api.nvim_create_augroup("opencode_window_layout", { clear = true })
 
@@ -179,3 +180,5 @@ return {
     end,
   },
 }
+
+return spec

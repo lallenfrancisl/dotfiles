@@ -126,5 +126,5 @@ fi
 alias zed='flatpak run dev.zed.Zed'
 
 # Command autosuggestions
-# source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 

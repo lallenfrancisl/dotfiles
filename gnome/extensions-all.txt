@@ -1,0 +1,9 @@
+dash-to-dock@micxgx.gmail.com
+caffeine@patapon.info
+arcmenu@arcmenu.com
+power-off-options@axelitama.github.io
+apps-menu@gnome-shell-extensions.gcampax.github.com
+background-logo@fedorahosted.org
+launch-new-instance@gnome-shell-extensions.gcampax.github.com
+places-menu@gnome-shell-extensions.gcampax.github.com
+window-list@gnome-shell-extensions.gcampax.github.com

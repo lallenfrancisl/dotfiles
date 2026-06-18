@@ -16,7 +16,10 @@ return {
     opts.diagnostics.signs = false
 
     opts.mappings.n["<Leader>Sl"] = {
-      function() require("resession").load(vim.fn.getcwd(), { dir = "dirsession" }) end,
+      function()
+        local ok, _ = pcall(function() require("resession").load(vim.fn.getcwd(), { dir = "dirsession" }) end)
+        if not ok then vim.notify("No session found for this directory", "info") end
+      end,
       desc = "Load root session",
     }
   end,

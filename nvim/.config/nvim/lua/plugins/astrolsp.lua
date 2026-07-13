@@ -14,6 +14,15 @@ return {
           },
         },
       },
+      vue_ls = {
+        cmd = function(dispatchers, config)
+          return vim.lsp.rpc.start({
+            "vue-language-server",
+            "--stdio",
+            "--tsdk=" .. config.root_dir .. "/node_modules/typescript/lib",
+          }, dispatchers)
+        end,
+      },
     },
   },
 }

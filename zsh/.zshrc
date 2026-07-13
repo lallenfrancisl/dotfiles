@@ -128,3 +128,6 @@ alias zed='flatpak run dev.zed.Zed'
 # Command autosuggestions
 source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
+
+# Vite+ bin (https://viteplus.dev)
+. "$HOME/.vite-plus/env"

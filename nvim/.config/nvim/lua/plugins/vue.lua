@@ -37,6 +37,10 @@ return {
         local tsdk, _, cmd = project_paths(config.root_dir)
         return vim.lsp.rpc.start({ cmd, "--stdio", "--tsdk=" .. tsdk }, dispatchers)
       end,
+      settings = {
+        css = { lint = { unknownAtRules = "ignore" } },
+        scss = { lint = { unknownAtRules = "ignore" } },
+      },
     }
     opts.config.vtsls.before_init = function(_, config)
       local _, vue_ls_path = project_paths(config.root_dir)

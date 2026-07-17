@@ -4,5 +4,9 @@
   "scroll_acceleration": {
     "enabled": true
   },
+  "keybinds": {
+    "input_newline": "return,alt+return,ctrl+j",
+    "input_submit": "ctrl+return"
+  },
   "theme": "kanagawa"
 }

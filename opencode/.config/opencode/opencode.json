@@ -1,4 +1,13 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "formatter": true
+  "formatter": true,
+  "provider": {
+    "openai": {
+      "options": {
+        "chunkTimeout": 30000,
+        "timeout": 600000
+      }
+    }
+  },
+  "shell": "/bin/zsh"
 }

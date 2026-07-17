@@ -1,41 +1,65 @@
 -- AstroLSP allows you to customize the features in AstroNvim's LSP configuration engine
 -- Configuration documentation can be found with `:h astrolsp`
 
----@type LazySpec
-return {
-  "AstroNvim/astrolsp",
-  ---@type AstroLSPOpts
-  opts = {
-    servers = { "oxfmt" },
-    formatting = {
-      filter = function(client)
-        local oxfmt_filetypes = {
-          javascript = true,
-          javascriptreact = true,
-          typescript = true,
-          typescriptreact = true,
-          vue = true,
-        }
+---@type AstroLSPOpts
+local opts = {
+  servers = { "oxfmt" },
+  formatting = {
+    filter = function(client)
+      local preferred_formatters = {
+        javascript = "oxfmt",
+        javascriptreact = "oxfmt",
+        typescript = "oxfmt",
+        typescriptreact = "oxfmt",
+        vue = "oxfmt",
+        html = "oxfmt",
+      }
 
-        return not oxfmt_filetypes[vim.bo.filetype] or client.name == "oxfmt"
+      local formatter = preferred_formatters[vim.bo.filetype]
+      return not formatter or client.name == formatter
+    end,
+  },
+  config = {
+    cssls = {
+      settings = {
+        css = { lint = { unknownAtRules = "ignore" } },
+        scss = { lint = { unknownAtRules = "ignore" } },
+      },
+    },
+    oxfmt = {
+      cmd = function(dispatchers, config)
+        local cmd = vim.fs.joinpath(config.root_dir, "node_modules/vite-plus/bin/oxfmt")
+        if vim.fn.executable(cmd) ~= 1 then cmd = "oxfmt" end
+
+        return vim.lsp.rpc.start({ cmd, "--lsp" }, dispatchers)
       end,
     },
-    config = {
-      oxfmt = {
-        cmd = function(dispatchers, config)
-          local cmd = vim.fs.joinpath(config.root_dir, "node_modules/vite-plus/bin/oxfmt")
-          if vim.fn.executable(cmd) ~= 1 then cmd = "oxfmt" end
-
-          return vim.lsp.rpc.start({ cmd, "--lsp" }, dispatchers)
-        end,
+    gopls = {
+      capabilities = {
+        workspace = {
+          didChangeWatchedFiles = { dynamicRegistration = true },
+        },
       },
-      gopls = {
-        settings = {
-          gopls = {
-            directoryFilters = { "-reference-code" },
-          },
+      settings = {
+        gopls = {
+          directoryFilters = { "-reference-code" },
         },
       },
     },
+    html = {
+      filetypes = { "html", "templ", "svg" },
+    },
+    vtsls = {
+      settings = {
+        javascript = { preferences = { importModuleSpecifier = "non-relative" } },
+        typescript = { preferences = { importModuleSpecifier = "non-relative" } },
+      },
+    },
   },
+}
+
+---@type LazySpec
+return {
+  "AstroNvim/astrolsp",
+  opts = opts,
 }

@@ -1,3 +1,4 @@
+if true then return {} end
 local function opencode_right_split_width() return 50 end
 
 local function opencode_has_room_on_right() return vim.o.columns - opencode_right_split_width() >= vim.o.columns * 0.7 end
